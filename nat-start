@@ -1,6 +1,6 @@
 #!/bin/sh
-proxy_port=8887
-lan_ip=192.168.51.1
+proxy_port=3458
+lan_ip=192.168.50.1
 ssh_port=22
 
 # ports redirect for clash except port 22 for ssh connection
@@ -22,7 +22,7 @@ iptables -t nat -A PREROUTING -j CLASH
 iptables -t nat -A OUTPUT -p tcp -d 198.18.0.0/16 -j REDIRECT --to-ports $proxy_port
 
 #DNS
-iptables -t nat -A PREROUTING -p udp -m udp --dport 53 -j DNAT --to-destination $lan_ip:54
+iptables -t nat -A PREROUTING -p udp -m udp --dport 53 -j DNAT --to-destination $lan_ip:23453
 
 # udp
 modprobe xt_TPROXY
